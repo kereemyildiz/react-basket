@@ -21,13 +21,13 @@ export default function App() {
 				? basket.map((basketItem) =>
 						basketItem.id === book.id
 							? { ...book, count: basketItem.count + 1 }
-							: book
+							: basketItem
 				  )
 				: [...basket, { ...book, count: 1 }]
 		);
 	};
 	return (
-		<BookContext.Provider value={{ data, addToBasket }}>
+		<BookContext.Provider value={{ data, addToBasket, basket }}>
 			<div className="App">
 				<Route exact path="/" component={Products} />
 				<Route path="/cart" component={Cart} />
