@@ -12,7 +12,7 @@ const Products = (props) => {
 				<span>Kitap Listesi</span>
 				<Link to="/cart">Sepetim</Link>
 			</h2>
-			{context.map((book) => {
+			{context.data.map((book) => {
 				return (
 					<div className="book" key={book.id}>
 						<img src={book.image} alt={book.name} />
@@ -20,7 +20,9 @@ const Products = (props) => {
 							<h4>{book.name}</h4>
 							<p>Yazar: {book.author}</p>
 							<p>Fiyat: {book.price} &#8378; </p>
-							<button>Sepete Ekle</button>
+							<button onClick={() => context.addToBasket(book)}>
+								Sepete Ekle
+							</button>
 						</div>
 					</div>
 				);
