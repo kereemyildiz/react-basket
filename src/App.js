@@ -26,8 +26,33 @@ export default function App() {
 				: [...basket, { ...book, count: 1 }]
 		);
 	};
+
+	const increase = (bookId) => {
+		setBasket(
+			basket.map((basketItem) =>
+				basketItem.id === bookId
+					? { ...basketItem, count: basketItem.count + 1 }
+					: basketItem
+			)
+		);
+	};
+
+	const decrease = (bookId) => {
+		setBasket(
+			basket.map((basketItem) =>
+				basketItem.id === bookId
+					? {
+							...basketItem,
+							count: basketItem.count > 1 ? basketItem.count - 1 : 1,
+					  }
+					: basketItem
+			)
+		);
+	};
 	return (
-		<BookContext.Provider value={{ data, addToBasket, basket }}>
+		<BookContext.Provider
+			value={{ data, addToBasket, basket, increase, decrease }}
+		>
 			<div className="App">
 				<Route exact path="/" component={Products} />
 				<Route path="/cart" component={Cart} />
