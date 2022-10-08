@@ -7,6 +7,7 @@ const Cart = () => {
 	const basket = context.basket;
 	const increase = context.increase;
 	const decrease = context.decrease;
+	const removeFromBasket = context.removeFromBasket;
 	return (
 		<div>
 			<h2>
@@ -27,12 +28,14 @@ const Cart = () => {
 							<p>Sepetinizde bu kitaptan toplam {basketItem.count} adet var.</p>
 							<button
 								onClick={() => {
-									decrease(basketItem.id);
+									decrease(basketItem);
 								}}
 							>
 								-
 							</button>
-							<button>Sepetten Çıkar</button>
+							<button onClick={() => removeFromBasket(basketItem.id)}>
+								Sepetten Çıkar
+							</button>
 							<button
 								onClick={() => {
 									increase(basketItem.id);

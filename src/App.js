@@ -37,21 +37,36 @@ export default function App() {
 		);
 	};
 
-	const decrease = (bookId) => {
-		setBasket(
-			basket.map((basketItem) =>
-				basketItem.id === bookId
-					? {
-							...basketItem,
-							count: basketItem.count > 1 ? basketItem.count - 1 : 1,
-					  }
-					: basketItem
-			)
-		);
+	const decrease = (book) => {
+		if (book.count === 1) {
+			removeFromBasket(book.id);
+		} else {
+			setBasket(
+				basket.map((basketItem) =>
+					basketItem.id === book.id
+						? {
+								...basketItem,
+								count: basketItem.count - 1,
+						  }
+						: basketItem
+				)
+			);
+		}
+	};
+
+	const removeFromBasket = (bookId) => {
+		setBasket(basket.filter((basketItem) => basketItem.id !== bookId));
 	};
 	return (
 		<BookContext.Provider
-			value={{ data, addToBasket, basket, increase, decrease }}
+			value={{
+				data,
+				addToBasket,
+				basket,
+				increase,
+				decrease,
+				removeFromBasket,
+			}}
 		>
 			<div className="App">
 				<Route exact path="/" component={Products} />
